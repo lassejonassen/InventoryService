@@ -1,4 +1,5 @@
 ﻿using InventoryService.Application.Abstractions.Messaging;
+using InventoryService.Domain.Entities;
 using InventoryService.Domain.Repositories;
 using InventoryService.Domain.Shared;
 
@@ -15,8 +16,20 @@ internal sealed class CreateItemTypeCommandHandler : ICommandHandler<CreateItemT
 		_unitOfOWork = unitOfOWork;
 	}
 
-	public Task<Result<Guid>> Handle(CreateItemTypeCommand request, CancellationToken cancellationToken)
+	public async Task<Result<Guid>> Handle(CreateItemTypeCommand request, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		var itemType = new ItemType
+		{
+			Id = Guid.NewGuid(),
+			CorrelationId = Guid.NewGuid(),
+			CreatedAt = DateTimeOffset.Now,
+			UpdatedAt = null,
+			Name = request.Name,
+		};
+
+		await _repository.CreateItemTypeAsync(itemType, cancellationToken);
+		await _unitOfOWork.SaveChangesAsync(cancellationToken);
+
+		return itemType.Id;
 	}
 }

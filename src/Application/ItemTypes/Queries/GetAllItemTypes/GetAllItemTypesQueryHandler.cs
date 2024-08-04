@@ -14,8 +14,8 @@ internal sealed class GetAllItemTypesQueryHandler : IQueryHandler<GetAllItemType
 		_repository = repository;
 	}
 
-	public Task<Result<IEnumerable<ItemType>>> Handle(GetAllItemTypesQuery request, CancellationToken cancellationToken)
+	public async Task<Result<IEnumerable<ItemType>>> Handle(GetAllItemTypesQuery request, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		return await _repository.GetAllItemsAsync(cancellationToken);
 	}
 }

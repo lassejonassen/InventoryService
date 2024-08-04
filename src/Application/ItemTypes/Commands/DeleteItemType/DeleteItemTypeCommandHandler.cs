@@ -15,8 +15,17 @@ internal sealed class DeleteItemTypeCommandHandler : ICommandHandler<DeleteItemT
 		_unitOfWork = unitOfWork;
 	}
 
-	public Task<Result> Handle(DeleteItemTypeCommand request, CancellationToken cancellationToken)
+	public async Task<Result> Handle(DeleteItemTypeCommand command, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		var result = await _repository.DeleteItemTypeAsync(command.Id, cancellationToken);
+
+		if (result.IsFailure)
+		{
+			return Result.Failure(result.Error);
+		}
+
+		await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+		return Result.Success();
 	}
 }

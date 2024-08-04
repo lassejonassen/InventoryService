@@ -14,8 +14,15 @@ internal sealed class GetItemTypeByIdQueryHandler : IQueryHandler<GetItemTypeByI
 		_repository = repository;
 	}
 
-	public Task<Result<ItemType>> Handle(GetItemTypeByIdQuery request, CancellationToken cancellationToken)
+	public async Task<Result<ItemType>> Handle(GetItemTypeByIdQuery request, CancellationToken cancellationToken)
 	{
-		throw new NotImplementedException();
+		var result = await _repository.GetItemByIdAsync(request.Id, cancellationToken);
+
+		if (result.IsFailure)
+		{
+			return Result.Failure<ItemType>(result.Error);
+		}
+
+		return result.Value;
 	}
 }
