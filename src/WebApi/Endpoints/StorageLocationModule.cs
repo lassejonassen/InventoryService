@@ -22,7 +22,7 @@ public class StorageLocationModule : CarterModule
 		app.MapPost("/", async (CreateStorageLocationCommand command, ISender sender) => {
 			var result = await sender.Send(command);
 			return result.IsSuccess
-				? Results.CreatedAtRoute($"/api/storage-locations/{result.Value.ToString()}")
+				? Results.Ok(result.Value.ToString())
 				: Results.BadRequest(result.Error);
 		});
 

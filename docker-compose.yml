@@ -4,7 +4,7 @@ services:
     container_name: inventoryservice.webapi
     build:
       context: .
-      dockerfile: WebApi/Dockerfile
+      dockerfile: src/WebApi/Dockerfile
     ports:
       - '5000:5000'
       - '5001:5001'
@@ -25,8 +25,9 @@ services:
     container_name: inventoryservice.migrations
     build:
       context: .
-      dockerfile: Migrations/Dockerfile
+      dockerfile: src/Migrations/Dockerfile
     depends_on:
       - inventoryservice.database
     environment:
-      - ConnectionStrings__InventoryDb=Host=inventoryservice.database;Database=inventorydb;Username=postgres;Password=postgres
+      - ConnectionStrings__Database=Host=inventoryservice.database;Database=inventorydb;Username=postgres;Password=postgres
+  
