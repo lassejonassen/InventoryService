@@ -6,7 +6,7 @@ namespace InventoryService.Infrastructure.Persistence;
 public sealed class ApplicationDbContext : DbContext
 {
 	public DbSet<StorageLocation> StorageLocations => Set<StorageLocation>();
-	public DbSet<ItemType> ItemTypes => Set<ItemType>();
+	public DbSet<ProductType> ItemTypes => Set<ProductType>();
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options) { }

@@ -3,4 +3,4 @@ using InventoryService.Domain.Entities;
 
 namespace InventoryService.Application.ItemTypes.Queries.GetAllItemTypes;
 
-public sealed record GetAllItemTypesQuery : IQuery<IEnumerable<ItemType>>;
+public sealed record GetAllProductTypesQuery : IQuery<IEnumerable<ProductType>>;

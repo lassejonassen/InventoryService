@@ -3,4 +3,4 @@ using InventoryService.Domain.Entities;
 
 namespace InventoryService.Application.ItemTypes.Commands.UpdateItemType;
 
-public sealed record UpdateItemTypeCommand(ItemType ItemType): ICommand;
+public sealed record UpdateProductTypeCommand(ProductType ItemType): ICommand;

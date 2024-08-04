@@ -8,18 +8,18 @@ using MediatR;
 
 namespace InventoryService.WebApi.Endpoints;
 
-public class ItemTypeModule : CarterModule
+public class ProductTypeModule : CarterModule
 {
 
-	public ItemTypeModule()
-		: base("/api/item-types")
+	public ProductTypeModule()
+		: base("/api/product-types")
 	{
-		WithTags("Item Types");
+		WithTags("Product Types");
 	}
 
 	public override void AddRoutes(IEndpointRouteBuilder app)
 	{
-		app.MapPost("/", async (CreateItemTypeCommand command, ISender sender) => {
+		app.MapPost("/", async (CreateProductTypeCommand command, ISender sender) => {
 			var result = await sender.Send(command);
 
 			if (result.IsFailure)
@@ -34,7 +34,7 @@ public class ItemTypeModule : CarterModule
 		});
 
 		app.MapGet("/", async (ISender sender) => {
-			var result = await sender.Send(new GetAllItemTypesQuery());
+			var result = await sender.Send(new GetAllProductTypesQuery());
 			if (result.IsFailure)
 			{
 				return Results.Problem(
@@ -47,7 +47,7 @@ public class ItemTypeModule : CarterModule
 		});
 
 		app.MapGet("/{id:guid}", async (Guid id, ISender sender) => {
-			var result = await sender.Send(new GetItemTypeByIdQuery(id));
+			var result = await sender.Send(new GetProductTypeByIdQuery(id));
 			if (result.IsFailure)
 			{
 				return Results.Problem(
@@ -59,7 +59,7 @@ public class ItemTypeModule : CarterModule
 			return Results.Ok(result.Value);
 		});
 
-		app.MapPatch("/", async (UpdateItemTypeCommand command, ISender sender) => {
+		app.MapPatch("/", async (UpdateProductTypeCommand command, ISender sender) => {
 			var result = await sender.Send(command);
 			if (result.IsFailure)
 			{
@@ -73,7 +73,7 @@ public class ItemTypeModule : CarterModule
 		});
 
 		app.MapDelete("/{id:guid}", async (Guid id, ISender sender) => {
-			var result = await sender.Send(new DeleteItemTypeCommand(id));
+			var result = await sender.Send(new DeleteProductTypeCommand(id));
 			if (result.IsFailure)
 			{
 				return Results.Problem(

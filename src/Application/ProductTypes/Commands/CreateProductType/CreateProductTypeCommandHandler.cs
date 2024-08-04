@@ -5,20 +5,20 @@ using InventoryService.Domain.Shared;
 
 namespace InventoryService.Application.ItemTypes.Commands.CreateItemType;
 
-internal sealed class CreateItemTypeCommandHandler : ICommandHandler<CreateItemTypeCommand, Guid>
+internal sealed class CreateProductTypeCommandHandler : ICommandHandler<CreateProductTypeCommand, Guid>
 {
-	private readonly IItemTypeRepository _repository;
+	private readonly IProductTypeRepository _repository;
 	private readonly IUnitOfWork _unitOfOWork;
 
-	public CreateItemTypeCommandHandler(IItemTypeRepository repository, IUnitOfWork unitOfOWork)
+	public CreateProductTypeCommandHandler(IProductTypeRepository repository, IUnitOfWork unitOfOWork)
 	{
 		_repository = repository;
 		_unitOfOWork = unitOfOWork;
 	}
 
-	public async Task<Result<Guid>> Handle(CreateItemTypeCommand request, CancellationToken cancellationToken)
+	public async Task<Result<Guid>> Handle(CreateProductTypeCommand request, CancellationToken cancellationToken)
 	{
-		var itemType = new ItemType
+		var itemType = new ProductType
 		{
 			Id = Guid.NewGuid(),
 			CorrelationId = Guid.NewGuid(),
@@ -27,7 +27,7 @@ internal sealed class CreateItemTypeCommandHandler : ICommandHandler<CreateItemT
 			Name = request.Name,
 		};
 
-		await _repository.CreateItemTypeAsync(itemType, cancellationToken);
+		await _repository.CreateProductTypeAsync(itemType, cancellationToken);
 		await _unitOfOWork.SaveChangesAsync(cancellationToken);
 
 		return itemType.Id;

@@ -4,20 +4,20 @@ using InventoryService.Domain.Shared;
 
 namespace InventoryService.Application.ItemTypes.Commands.UpdateItemType;
 
-internal sealed class UpdateItemTypeCommandHandler : ICommandHandler<UpdateItemTypeCommand>
+internal sealed class UpdateProductTypeCommandHandler : ICommandHandler<UpdateProductTypeCommand>
 {
-	private readonly IItemTypeRepository _repository;
+	private readonly IProductTypeRepository _repository;
 	private readonly IUnitOfWork _unitOfOWork;
 
-	public UpdateItemTypeCommandHandler(IItemTypeRepository repository, IUnitOfWork unitOfOWork)
+	public UpdateProductTypeCommandHandler(IProductTypeRepository repository, IUnitOfWork unitOfOWork)
 	{
 		_repository = repository;
 		_unitOfOWork = unitOfOWork;
 	}
 
-	public async Task<Result> Handle(UpdateItemTypeCommand command, CancellationToken cancellationToken)
+	public async Task<Result> Handle(UpdateProductTypeCommand command, CancellationToken cancellationToken)
 	{
-		var result = await _repository.UpdateItemTypeAsync(command.ItemType, cancellationToken);
+		var result = await _repository.UpdateProductTypeAsync(command.ItemType, cancellationToken);
 
 		if (result.IsFailure)
 		{

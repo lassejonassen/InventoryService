@@ -2,4 +2,4 @@
 
 namespace InventoryService.Application.ItemTypes.Commands.CreateItemType;
 
-public sealed record CreateItemTypeCommand(string Name) : ICommand<Guid>;
+public sealed record CreateProductTypeCommand(string Name) : ICommand<Guid>;

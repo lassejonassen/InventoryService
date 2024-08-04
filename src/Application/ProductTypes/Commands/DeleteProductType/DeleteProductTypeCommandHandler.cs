@@ -4,20 +4,20 @@ using InventoryService.Domain.Shared;
 
 namespace InventoryService.Application.ItemTypes.Commands.DeleteItemType;
 
-internal sealed class DeleteItemTypeCommandHandler : ICommandHandler<DeleteItemTypeCommand>
+internal sealed class DeleteProductTypeCommandHandler : ICommandHandler<DeleteProductTypeCommand>
 {
-	private readonly IItemTypeRepository _repository;
+	private readonly IProductTypeRepository _repository;
 	private readonly IUnitOfWork _unitOfWork;
 
-	public DeleteItemTypeCommandHandler(IItemTypeRepository repository, IUnitOfWork unitOfWork)
+	public DeleteProductTypeCommandHandler(IProductTypeRepository repository, IUnitOfWork unitOfWork)
 	{
 		_repository = repository;
 		_unitOfWork = unitOfWork;
 	}
 
-	public async Task<Result> Handle(DeleteItemTypeCommand command, CancellationToken cancellationToken)
+	public async Task<Result> Handle(DeleteProductTypeCommand command, CancellationToken cancellationToken)
 	{
-		var result = await _repository.DeleteItemTypeAsync(command.Id, cancellationToken);
+		var result = await _repository.DeleteProductTypeAsync(command.Id, cancellationToken);
 
 		if (result.IsFailure)
 		{

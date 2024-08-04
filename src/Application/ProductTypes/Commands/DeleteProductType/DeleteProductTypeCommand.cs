@@ -2,4 +2,4 @@
 
 namespace InventoryService.Application.ItemTypes.Commands.DeleteItemType;
 
-public sealed record DeleteItemTypeCommand(Guid Id) : ICommand;
+public sealed record DeleteProductTypeCommand(Guid Id) : ICommand;

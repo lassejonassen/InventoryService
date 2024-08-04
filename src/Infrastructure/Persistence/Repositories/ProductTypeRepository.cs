@@ -5,45 +5,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InventoryService.Infrastructure.Persistence.Repositories;
 
-public sealed class ItemTypeRepository : IItemTypeRepository
+public sealed class ProductTypeRepository : IProductTypeRepository
 {
 	private readonly ApplicationDbContext _dbContext;
 
-	public ItemTypeRepository(ApplicationDbContext dbContext)
+	public ProductTypeRepository(ApplicationDbContext dbContext)
 	{
 		_dbContext = dbContext;
 	}
 
-	public async Task<Result> CreateItemTypeAsync(ItemType itemType, CancellationToken cancellationToken)
+	public async Task<Result> CreateProductTypeAsync(ProductType itemType, CancellationToken cancellationToken)
 	{
 		await _dbContext.ItemTypes.AddAsync(itemType, cancellationToken);
 		return Result.Success();
 	}
 
-	public async Task<Result<IEnumerable<ItemType>>> GetAllItemsAsync(CancellationToken cancellationToken)
+	public async Task<Result<IEnumerable<ProductType>>> GetAllProductTypesAsync(CancellationToken cancellationToken)
 	{
 		return await _dbContext.ItemTypes.ToListAsync(cancellationToken);
 	}
 
-	public async Task<Result<ItemType>> GetItemByIdAsync(Guid id, CancellationToken cancellationToken)
+	public async Task<Result<ProductType>> GetProductTypeByIdAsync(Guid id, CancellationToken cancellationToken)
 	{
 		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
 		if (entity is null)
 		{
-			return Result.Failure<ItemType>(ItemTypeErrors.NotFound);
+			return Result.Failure<ProductType>(ProductTypeErrors.NotFound);
 		}
 
 		return entity!;
 	}
 
-	public async Task<Result> UpdateItemTypeAsync(ItemType itemType, CancellationToken cancellationToken)
+	public async Task<Result> UpdateProductTypeAsync(ProductType itemType, CancellationToken cancellationToken)
 	{
 		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == itemType.Id, cancellationToken);
 
 		if (entity is null)
 		{
-			return Result.Failure<ItemType>(ItemTypeErrors.NotFound);
+			return Result.Failure<ProductType>(ProductTypeErrors.NotFound);
 		}
 
 		entity.Name = itemType.Name;
@@ -55,7 +55,7 @@ public sealed class ItemTypeRepository : IItemTypeRepository
 		return Result.Success();
 	}
 
-	public async Task<Result> DeleteItemTypeAsync(Guid id, CancellationToken cancellationToken)
+	public async Task<Result> DeleteProductTypeAsync(Guid id, CancellationToken cancellationToken)
 	{
 		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 

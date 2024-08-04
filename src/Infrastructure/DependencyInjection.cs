@@ -26,7 +26,7 @@ public static class DependencyInjection
 		services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 		services.AddScoped<ICommandRepository, CommandRepository>();
 		services.AddScoped<IStorageLocationRepository, StorageLocationRepository>();
-		services.AddScoped<IItemTypeRepository, ItemTypeRepository>();
+		services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 
 		return services;
 	}
