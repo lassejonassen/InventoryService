@@ -26,7 +26,12 @@ internal sealed class CreateStorageLocationCommandHandler : ICommandHandler<Crea
 			CreatedAt = DateTimeOffset.Now,
 			UpdatedAt = null,
 			Name= command.Name,
-			Description = command.Description
+			Description = command.Description,
+			Capacity = command.Capacity,
+			Street = command.Street,
+			City = command.City,
+			Country = command.Country,
+			PostalCode = command.PostalCode
 		};
 
 		await _storageLocationRepository.CreateStorageLocationAsync(storageLocation, cancellationToken);

@@ -1,23 +1,13 @@
-﻿using InventoryService.Domain.Shared;
-
-namespace InventoryService.Domain.Entities;
+﻿namespace InventoryService.Domain.Entities;
 
 public sealed record StorageLocation : Entity
 {
 	public required string Name { get; set; }
 	public string? Description { get; set; }
-}
-
-public sealed record StorageLocationCreate
-{
-	public required string Name { get; init; }
-	public string? Description { get; init; }
-}
-
-public static class StorageLocationErrors
-{
-	private static readonly string Base = "StorageLocation";
-
-	public static readonly Error NotFound = new(
-		$"{Base}.NotFound", "The Storage Location was not found");
+	public int? Capacity { get; set; }
+	public string? Street { get; set; }
+	public string? City { get; set; }
+	public string? Country { get; set; }
+	public string? PostalCode { get; set; }
+	public ICollection<InventoryItem>? Items { get; set; }
 }
