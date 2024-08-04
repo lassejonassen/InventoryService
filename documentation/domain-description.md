@@ -1,7 +1,37 @@
 # Domain Description
 
+The purpose of inventory service is to allow the user to manage storage locations, inventory items, products and product types, a long with the suppliers of the products.
 
-The Inventory Service is responsible for handling anything regarding the Inventory of a Storage Location. It currently also administrates Suppliers and their Products, which should be moved into a separate service at some point.
+## Domain context
 
-This document will also display all the different domain entities and their properties for further explanation, along with a diagram displaying how the database looks and its tables and columns.
+The domain in which the inventory service plays into is a warehouse management system.
 
+## Functionality
+
+*Describe the specific functionality or features that the microservice provides. This could include the types of operations it performs, the data it manages, or the services it exposes to other components.*
+
+## API Contracts
+
+*If the microservice exposes APIs, specify the contracts or interfaces that other components can use to interact with it. This could include RESTful endpoints, message queues, or event-driven communication.*
+
+## Data Model
+
+*If the microservice manages data, outline the data model it uses. This can include the structure of the data and any relationships or constraints.*
+
+## Dependencies
+
+The service requires a PostgresSQL database with the name of InventoryDB to work.
+
+*List any dependencies that the microservice has on other services or components. This could include databases, external APIs, or message brokers.*
+
+## Performance and scalability
+
+*Highlight any performance considerations or scalability features of the microservice. This can include information about response times, throughput, or the ability to handle increased loads.*
+
+## Security and Authorization
+
+*If the microservice handles sensitive data or requires authentication/authorization, mention the security measures in place to protect the data and control access.*
+
+## Deployment and Infrastructure
+
+*Provide information about how the microservice is deployed and the infrastructure it requires. This could include details about the hosting environment, deployment strategies, or any specific runtime requirements.*
