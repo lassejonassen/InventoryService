@@ -17,16 +17,16 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=inventorydb
     volumes:
-      - ./.containers/inventory-db:/var/lib/postgresql/data
+      - ./.containers/inventory-db:/var/lib/postgressql/data
     ports:
       - '5432:5432'
-  # inventoryservice.migrations:
-  #   image: ${DOCKER_REGISTRY-}migrations
-  #   container_name: inventoryservice.migrations
-  #   build:
-  #     context: .
-  #     dockerfile: Migrations/Dockerfile
-  #   depends_on:
-  #     - inventoryservice.database
-  #   environment:
-  #     - ConnectionStrings__InventoryDb=Host=inventoryservice.database;Database=inventorydb;Username=postgres;Password=postgres
+  inventoryservice.migrations:
+    image: ${DOCKER_REGISTRY-}migrations
+    container_name: inventoryservice.migrations
+    build:
+      context: .
+      dockerfile: Migrations/Dockerfile
+    depends_on:
+      - inventoryservice.database
+    environment:
+      - ConnectionStrings__InventoryDb=Host=inventoryservice.database;Database=inventorydb;Username=postgres;Password=postgres

@@ -7,10 +7,10 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Migrations/Migrations.csproj", "src/Migrations/"]
-RUN dotnet restore "./src/Migrations/Migrations.csproj"
+COPY ["Migrations/Migrations.csproj", "Migrations/"]
+RUN dotnet restore "./Migrations/Migrations.csproj"
 COPY . .
-WORKDIR "/src/src/Migrations"
+WORKDIR "/src/Migrations"
 RUN dotnet build "./Migrations.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
