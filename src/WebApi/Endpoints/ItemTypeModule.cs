@@ -1,24 +1,25 @@
 ﻿using Carter;
-using InventoryService.Application.StorageLocations.Commands.CreateStorageLocation;
-using InventoryService.Application.StorageLocations.Commands.DeleteStorageLocation;
-using InventoryService.Application.StorageLocations.Commands.UpdateStorageLocation;
-using InventoryService.Application.StorageLocations.Queries.GetAllStorageLocations;
-using InventoryService.Application.StorageLocations.Queries.GetStorageLocationById;
+using InventoryService.Application.ItemTypes.Commands.CreateItemType;
+using InventoryService.Application.ItemTypes.Commands.DeleteItemType;
+using InventoryService.Application.ItemTypes.Commands.UpdateItemType;
+using InventoryService.Application.ItemTypes.Queries.GetAllItemTypes;
+using InventoryService.Application.ItemTypes.Queries.GetItemTypeById;
 using MediatR;
 
 namespace InventoryService.WebApi.Endpoints;
 
-public class StorageLocationModule : CarterModule
+public class ItemTypeModule : CarterModule
 {
-	public StorageLocationModule()
-		: base("/api/storage-locations")
+
+	public ItemTypeModule()
+		: base("/api/item-types")
 	{
-		WithTags("Storage Locations");
+		WithTags("Item Types");
 	}
 
 	public override void AddRoutes(IEndpointRouteBuilder app)
 	{
-		app.MapPost("/", async (CreateStorageLocationCommand command, ISender sender) => {
+		app.MapPost("/", async (CreateItemTypeCommand command, ISender sender) => {
 			var result = await sender.Send(command);
 
 			if (result.IsFailure)
@@ -33,7 +34,7 @@ public class StorageLocationModule : CarterModule
 		});
 
 		app.MapGet("/", async (ISender sender) => {
-			var result = await sender.Send(new GetAllStorageLocationsQuery());
+			var result = await sender.Send(new GetAllItemTypesQuery());
 			if (result.IsFailure)
 			{
 				return Results.Problem(
@@ -46,7 +47,7 @@ public class StorageLocationModule : CarterModule
 		});
 
 		app.MapGet("/{id:guid}", async (Guid id, ISender sender) => {
-			var result = await sender.Send(new GetStorageLocationByIdQuery(id));
+			var result = await sender.Send(new GetItemTypeByIdQuery(id));
 			if (result.IsFailure)
 			{
 				return Results.Problem(
@@ -58,7 +59,7 @@ public class StorageLocationModule : CarterModule
 			return Results.Ok(result.Value);
 		});
 
-		app.MapPatch("/", async (UpdateStorageLocationCommand command, ISender sender) => {
+		app.MapPatch("/", async (UpdateItemTypeCommand command, ISender sender) => {
 			var result = await sender.Send(command);
 			if (result.IsFailure)
 			{
@@ -72,7 +73,7 @@ public class StorageLocationModule : CarterModule
 		});
 
 		app.MapDelete("/{id:guid}", async (Guid id, ISender sender) => {
-			var result = await sender.Send(new DeleteStorageLocationCommand(id));
+			var result = await sender.Send(new DeleteItemTypeCommand(id));
 			if (result.IsFailure)
 			{
 				return Results.Problem(

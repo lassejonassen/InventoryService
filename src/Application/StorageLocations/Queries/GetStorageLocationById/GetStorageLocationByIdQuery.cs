@@ -3,4 +3,4 @@ using InventoryService.Domain.Entities;
 
 namespace InventoryService.Application.StorageLocations.Queries.GetStorageLocationById;
 
-public sealed record GetStorageLocationByIdQuery(Guid id) : IQuery<StorageLocation>;
+public sealed record GetStorageLocationByIdQuery(Guid Id) : IQuery<StorageLocation>;

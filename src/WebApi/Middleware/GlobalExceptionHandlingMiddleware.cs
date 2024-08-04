@@ -20,6 +20,25 @@ public class GlobalExceptionHandlingMiddleware
 		{
 			await _next(context);
 		}
+		catch (NotImplementedException ex)
+		{
+			_logger.LogError(ex, ex.Message);
+
+			context.Response.StatusCode = (int)StatusCodes.Status500InternalServerError;
+
+			ProblemDetails problem = new() {
+				Status = StatusCodes.Status501NotImplemented,
+				Type = "Not Implemented",
+				Title = "Action not implemented",
+				Detail = "The requested action is not implemented",
+			};
+
+			string json = JsonSerializer.Serialize(problem);
+
+			context.Response.ContentType = "application/json";
+
+			await context.Response.WriteAsync(json);
+		}
 		catch (Exception ex)
 		{
 			_logger.LogError(ex, ex.Message);

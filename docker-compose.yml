@@ -30,4 +30,3 @@ services:
       - inventoryservice.database
     environment:
       - ConnectionStrings__Database=Host=inventoryservice.database;Database=inventorydb;Username=postgres;Password=postgres
-  
