@@ -1,4 +1,5 @@
 ﻿using InventoryService.Domain.Entities;
+using InventoryService.Domain.Errors;
 using InventoryService.Domain.Repositories;
 using InventoryService.Domain.Shared;
 using Microsoft.EntityFrameworkCore;

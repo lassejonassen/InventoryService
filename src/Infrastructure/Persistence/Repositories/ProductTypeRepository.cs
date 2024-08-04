@@ -1,4 +1,5 @@
 ﻿using InventoryService.Domain.Entities;
+using InventoryService.Domain.Errors;
 using InventoryService.Domain.Repositories;
 using InventoryService.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -16,18 +17,18 @@ public sealed class ProductTypeRepository : IProductTypeRepository
 
 	public async Task<Result> CreateProductTypeAsync(ProductType itemType, CancellationToken cancellationToken)
 	{
-		await _dbContext.ItemTypes.AddAsync(itemType, cancellationToken);
+		await _dbContext.ProductTypes.AddAsync(itemType, cancellationToken);
 		return Result.Success();
 	}
 
 	public async Task<Result<IEnumerable<ProductType>>> GetAllProductTypesAsync(CancellationToken cancellationToken)
 	{
-		return await _dbContext.ItemTypes.ToListAsync(cancellationToken);
+		return await _dbContext.ProductTypes.ToListAsync(cancellationToken);
 	}
 
 	public async Task<Result<ProductType>> GetProductTypeByIdAsync(Guid id, CancellationToken cancellationToken)
 	{
-		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+		var entity = await _dbContext.ProductTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
 		if (entity is null)
 		{
@@ -39,7 +40,7 @@ public sealed class ProductTypeRepository : IProductTypeRepository
 
 	public async Task<Result> UpdateProductTypeAsync(ProductType itemType, CancellationToken cancellationToken)
 	{
-		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == itemType.Id, cancellationToken);
+		var entity = await _dbContext.ProductTypes.FirstOrDefaultAsync(e => e.Id == itemType.Id, cancellationToken);
 
 		if (entity is null)
 		{
@@ -57,14 +58,14 @@ public sealed class ProductTypeRepository : IProductTypeRepository
 
 	public async Task<Result> DeleteProductTypeAsync(Guid id, CancellationToken cancellationToken)
 	{
-		var entity = await _dbContext.ItemTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+		var entity = await _dbContext.ProductTypes.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
 		if (entity is null)
 		{
 			return Result.Failure<StorageLocation>(StorageLocationErrors.NotFound);
 		}
 
-		_dbContext.ItemTypes.Remove(entity);
+		_dbContext.ProductTypes.Remove(entity);
 		return Result.Success();
 	}
 }
