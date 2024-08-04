@@ -1,0 +1,2 @@
+# Domain Description
+The Inventory Service is responsible for handling anything regarding the Inventory of a Storage Location. It currently also administrates Suppliers and their Products, which should be moved into a separate service at some point.
