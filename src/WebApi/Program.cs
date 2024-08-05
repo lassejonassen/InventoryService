@@ -8,12 +8,21 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, loggerConfig) =>
-	loggerConfig.ReadFrom.Configuration(context.Configuration));
+builder.Configuration.AddAppConfiguration(builder.Configuration);
+
+string applicationName = builder.Configuration.GetSection("Name").Value!;
+string applicationVersion = builder.Configuration.GetSection("Version").Value!;
+
+Console.WriteLine("""
+	=== Warehouse Management System ===
+	Service Name: {0}
+	Service Version: {1}
+	""", applicationName, applicationVersion);
+
+builder.Host.AddSerilog(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 builder.Services.AddCarter();
 
@@ -41,7 +50,7 @@ if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI();
-	//app.ApplyMigrations();
+	//app.ApplyMigrations(); // Uncomment method call if Docker Compose is not used.
 }
 
 app.UseHttpsRedirection();

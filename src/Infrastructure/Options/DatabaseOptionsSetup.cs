@@ -6,7 +6,8 @@ namespace InventoryService.Infrastructure.Options;
 
 public class DatabaseOptionsSetup : IConfigureOptions<DatabaseOptions>
 {
-	private const string ConfigurationSectionName = "DatabaseOptions";
+	private const string ConfigurationSectionName = "AppSettings:DatabaseOptions";
+	private const string ConnectionStringSectionName = "AppSettings:ConnectionStrings:Database";	
 	private readonly IConfiguration _configuration;
 
 	public DatabaseOptionsSetup(IConfiguration configuration)
@@ -16,7 +17,7 @@ public class DatabaseOptionsSetup : IConfigureOptions<DatabaseOptions>
 
 	public void Configure(DatabaseOptions options)
 	{
-		string connectionString = _configuration.GetConnectionString("Database")
+		string connectionString = _configuration.GetSection(ConnectionStringSectionName).Value
 			?? throw new Exception("Database connection string is missing from configuration.");
 
 		options.ConnectionString = connectionString;
