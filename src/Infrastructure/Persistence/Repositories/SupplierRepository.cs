@@ -86,4 +86,10 @@ public sealed class SupplierRepository : ISupplierRepository
 		_dbContext.Suppliers.Remove(entity);
 		return Result.Success();
 	}
+
+	public async Task<bool> IsNameUnique(string name, CancellationToken cancellationToken)
+	{
+		var exists = await _dbContext.Suppliers.AnyAsync(x => x.Name == name, cancellationToken);
+		return !exists;
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using InventoryService.Application.Abstractions.Messaging;
 using InventoryService.Domain.Entities;
+using InventoryService.Domain.Errors;
 using InventoryService.Domain.Repositories;
 using InventoryService.Domain.Shared;
 
@@ -18,6 +19,13 @@ internal sealed class CreateSupplierCommandHandler : ICommandHandler<CreateSuppl
 
 	public async Task<Result<Guid>> Handle(CreateSupplierCommand command, CancellationToken cancellationToken)
 	{
+
+		if (!await _repository.IsNameUnique(command.Name, cancellationToken))
+		{
+			return Result.Failure<Guid>(SupplierErrors.SupplierAlreadyExists);
+		}
+
+
 		var supplier = new Supplier() {
 			Id = Guid.NewGuid(),
 			CorrelationId = Guid.NewGuid(),

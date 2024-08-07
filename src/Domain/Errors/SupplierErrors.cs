@@ -11,4 +11,7 @@ public static class SupplierErrors
 
 	public static readonly Error NotFoundByName = new(
 		$"{Base}.NotFound", "The Supplier was not found by given name");
+
+	public static readonly Error SupplierAlreadyExists = new(
+		$"{Base}.Conflict", "A Supplier with the given name already exists.");
 }

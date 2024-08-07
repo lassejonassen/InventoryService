@@ -11,4 +11,6 @@ public interface ISupplierRepository
 	Task<Result<Supplier>> GetByNameAsync(string name, CancellationToken cancellationToken);
 	Task<Result> UpdateAsync(Supplier supplier, CancellationToken cancellationToken);
 	Task<Result> DeleteAsync(Guid id, CancellationToken cancellationToken);
+
+	Task<bool> IsNameUnique(string name, CancellationToken cancellationToken);
 }
