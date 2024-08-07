@@ -20,7 +20,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Products\Commands\CreateProduct\" />
 	  <Folder Include="Products\Commands\DeleteProduct\" />
 	  <Folder Include="Products\Commands\UpdateSupplier\" />
 	  <Folder Include="Products\Commands\UpdateProduct\" />
