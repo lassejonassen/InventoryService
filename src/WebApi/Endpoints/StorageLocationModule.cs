@@ -14,6 +14,7 @@ public class StorageLocationModule : CarterModule
 		: base("/api/storage-locations")
 	{
 		WithTags("Storage Locations");
+		RequireAuthorization();
 	}
 
 	public override void AddRoutes(IEndpointRouteBuilder app)

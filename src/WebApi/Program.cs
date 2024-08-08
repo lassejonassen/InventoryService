@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddAppConfiguration(builder.Configuration);
 builder.AddApplicationInsights(builder.Configuration);
+builder.Services.AddAuthentication(builder.Configuration);
 
 string applicationName = builder.Configuration.GetSection("Name").Value!;
 string applicationVersion = builder.Configuration.GetSection("Version").Value!;
@@ -59,6 +60,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseMiddleware<RequestLogContextMiddleware>();
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
