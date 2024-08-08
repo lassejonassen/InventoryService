@@ -5,7 +5,7 @@ namespace InventoryService.WebApi.Extensions;
 public static class AzureAppConfiguration
 {
 	public const string SectionName = "AppSettings:ConnectionStrings:AppConfig";
-	public const string Label = "SupplierService";
+	public const string Label = "InventoryService";
 
 	public static void AddAppConfiguration(this IConfigurationBuilder configurationBuilder, IConfiguration configuration)
 	{

@@ -38,6 +38,7 @@ public static class DependencyInjection
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
 		services.AddScoped<IStorageLocationRepository, StorageLocationRepository>();
+		services.AddScoped<IStatusRepository, StatusRepository>();
 
 		return services;
 	}

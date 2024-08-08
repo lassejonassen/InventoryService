@@ -10,9 +10,8 @@ public class InventoryItemConfiguration : IEntityTypeConfiguration<InventoryItem
 	{
 		builder.HasKey(x => x.Id);
 
-		builder.HasOne(x => x.Product)
-			.WithMany(x => x.Items)
-			.HasForeignKey(x => x.ProductId);
+		builder.Property(x => x.ProductId)
+			.IsRequired();
 
 		builder.HasOne(x => x.StorageLocation)
 			.WithMany(x => x.Items)

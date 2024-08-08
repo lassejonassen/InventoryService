@@ -33,7 +33,7 @@ public sealed class StorageLocationRepository : IStorageLocationRepository
 
 		if (entity is null)
 		{
-			return Result.Failure<StorageLocation>(StorageLocationErrors.NotFound);
+			return Result.Failure<StorageLocation>(DomainErrors.StorageLocation.NotFound);
 		}
 
 		return entity!;
@@ -45,7 +45,7 @@ public sealed class StorageLocationRepository : IStorageLocationRepository
 
 		if (entity is null)
 		{
-			return Result.Failure<StorageLocation>(StorageLocationErrors.NotFound);
+			return Result.Failure<StorageLocation>(DomainErrors.StorageLocation.NotFound);
 		}
 
 		entity.Name = storageLocation.Name;
@@ -64,7 +64,7 @@ public sealed class StorageLocationRepository : IStorageLocationRepository
 
 		if (entity is null)
 		{
-			return Result.Failure<StorageLocation>(StorageLocationErrors.NotFound);
+			return Result.Failure<StorageLocation>(DomainErrors.StorageLocation.NotFound);
 		}
 
 		_dbContext.StorageLocations.Remove(entity);

@@ -7,6 +7,7 @@ public sealed class ApplicationDbContext : DbContext
 {
 	public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
 	public DbSet<StorageLocation> StorageLocations => Set<StorageLocation>();
+	public DbSet<Status> Statuses => Set<Status>();
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options) { }

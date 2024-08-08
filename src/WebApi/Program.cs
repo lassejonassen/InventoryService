@@ -1,9 +1,13 @@
 using Asp.Versioning;
 using Carter;
 using InventoryService.Application;
+using InventoryService.Application.Statuses.Queries.GetAllStatuses;
 using InventoryService.Infrastructure;
+using InventoryService.Infrastructure.Persistence;
+using InventoryService.Infrastructure.Persistence.Seeding;
 using InventoryService.WebApi.Extensions;
 using InventoryService.WebApi.Middleware;
+using MediatR;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,5 +64,23 @@ app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 app.UseSerilogRequestLogging();
 
 app.MapCarter();
+
+
+app.MapPost("/seed", async (ApplicationDbContext context) => {
+	await StatusesSeeder.SeedAsync(context, default);
+});
+
+app.MapGet("/status", async (ISender sender) => {
+	var result = await sender.Send(new GetAllStatusesQuery());
+	if (result.IsFailure)
+	{
+		return Results.Problem(
+			title: result.Error.Title,
+			detail: result.Error.Description,
+			statusCode: StatusCodes.Status400BadRequest);
+	}
+
+	return Results.Ok(result.Value);
+});
 
 app.Run();
