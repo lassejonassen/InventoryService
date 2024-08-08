@@ -1,4 +1,6 @@
-﻿namespace InventoryService.Domain.Entities;
+﻿using InventoryService.Domain.Primitives;
+
+namespace InventoryService.Domain.Entities;
 
 public sealed record StorageLocation : Entity
 {

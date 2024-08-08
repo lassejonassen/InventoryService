@@ -46,7 +46,7 @@ public class CreateSupplierCommandHandlerTests
 
 		// Assert
 		result.IsFailure.Should().BeTrue();
-		result.Error.Should().Be(SupplierErrors.SupplierAlreadyExists);
+		result.Error.Should().Be(DomainErrors.Supplier.SupplierAlreadyExists);
 	}
 
 	[Fact]

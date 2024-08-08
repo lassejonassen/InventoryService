@@ -5,7 +5,7 @@ namespace InventoryService.WebApi.Extensions;
 public static class AzureAppConfiguration
 {
 	public const string SectionName = "AppSettings:ConnectionStrings:AppConfig";
-	public const string Label = "InventoryService";
+	public const string Label = "SupplierService";
 
 	public static void AddAppConfiguration(this IConfigurationBuilder configurationBuilder, IConfiguration configuration)
 	{
@@ -16,7 +16,7 @@ public static class AzureAppConfiguration
 			Console.WriteLine("Using Azure App Configuration");
 			configurationBuilder.AddAzureAppConfiguration(options => {
 				options.Connect(appConfigConnectionString)
-					.Select(KeyFilter.Any, LabelFilter.Null)
+					.Select(KeyFilter.Any, "Shared")
 					.Select(KeyFilter.Any, Label);
 			});
 		}

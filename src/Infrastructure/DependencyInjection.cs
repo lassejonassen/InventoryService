@@ -37,17 +37,8 @@ public static class DependencyInjection
 
 		services.AddScoped<IUnitOfWork, UnitOfWork>();
 		services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
-		services.AddScoped<IProductRepository, ProductRepository>();
-		services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 		services.AddScoped<IStorageLocationRepository, StorageLocationRepository>();
-		services.AddScoped<ISupplierRepository, SupplierRepository>();
 
-		return services;
-	}
-
-	private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
-	{
-		
 		return services;
 	}
 }
