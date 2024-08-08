@@ -13,6 +13,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddAppConfiguration(builder.Configuration);
+builder.AddApplicationInsights(builder.Configuration);
 
 string applicationName = builder.Configuration.GetSection("Name").Value!;
 string applicationVersion = builder.Configuration.GetSection("Version").Value!;
